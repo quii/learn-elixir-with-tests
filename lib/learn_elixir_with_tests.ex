@@ -30,7 +30,7 @@ defmodule LearnElixirWithTests do
    |> add(2)
   end
 
-  defp add(x, y), do: x + y
+  def add(x, y), do: x + y
 
   defp greeting_prefix(language) do 
     case language do

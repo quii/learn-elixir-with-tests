@@ -53,8 +53,8 @@ defmodule LearnElixirWithTestsTest do
     is
     multiline"
 
-    heredoc = """
-    I dont understand the etymology of heredoc
+    _ = """
+    I dont understand the etymology of heredoc (this is what these are called)
     but it must end on its own line """
     """
 
@@ -77,6 +77,37 @@ defmodule LearnElixirWithTestsTest do
     assert Enum.map(list, fn(x) -> x+2 end) == [3, 4]
     assert Enum.map(list, fn(x) -> LearnElixirWithTests.multiplyBy2(x) end) == [2, 4]
     assert Enum.map(list, multiplyBy2) == [2, 4]
+  end
+
+  test "closures" do
+    some_var = 5
+
+    my_lambda = fn(x) ->
+      LearnElixirWithTests.add(x, some_var)
+    end
+
+
+    assert my_lambda.(2) == 7
+  end
+
+  test "range" do 
+    range = 1..3
+    assert 2 in range
+    refute 4 in range
+  end
+
+  test "keyword list, list of pairs. Often used to let clients pass arbitary number of optional arguments" do 
+    days = [{:monday, 1}, {:tuesday, 2}]
+    other_syntax = [monday: 1, tuesday: 2]
+
+    assert days == other_syntax
+    assert Keyword.get(days, :monday) == 1
+    assert Keyword.get(days, :bob) == nil
+    assert days[:monday] == 1
+
+    assert Float.to_string(1/3, [decimals: 2]) == "0.33"
+    # can omit the square brackets if last argument is a keyword list
+    assert Float.to_string(1/3, decimals: 1) == "0.3"
   end
 
 end
