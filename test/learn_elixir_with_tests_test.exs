@@ -48,4 +48,35 @@ defmodule LearnElixirWithTestsTest do
     assert person2.salary == 100
   end
 
+  test "strings" do 
+    _ = "This
+    is
+    multiline"
+
+    heredoc = """
+    I dont understand the etymology of heredoc
+    but it must end on its own line """
+    """
+
+    assert "Hello, world" == "Hello, " <> "world"
+  end
+
+  test "first class functions" do 
+    square = fn(x) ->
+      x * x
+    end
+
+    # & is known as the capture operator (/1 bit is the arity)
+    # captures a function and turns it into a lambda
+    multiplyBy2 = &LearnElixirWithTests.multiplyBy2/1
+
+    list = [1, 2]
+
+    assert square.(3) == 9
+    assert Enum.map(list, square) == [1, 4]
+    assert Enum.map(list, fn(x) -> x+2 end) == [3, 4]
+    assert Enum.map(list, fn(x) -> LearnElixirWithTests.multiplyBy2(x) end) == [2, 4]
+    assert Enum.map(list, multiplyBy2) == [2, 4]
+  end
+
 end
