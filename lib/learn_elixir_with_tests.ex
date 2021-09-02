@@ -7,7 +7,28 @@ defmodule LearnElixirWithTests do
     greeting_prefix(language) <> @the_comma_thing <> name
   end
 
-  def chaining, do: -5 |> abs |> add(2)
+  @doc ~S"""
+  Returns 2
+
+  ## Examples
+
+      iex> LearnElixirWithTests.multiplyBy2(1)
+      2
+
+      iex> LearnElixirWithTests.multiplyBy2(2)
+      4
+
+  """
+  def multiplyBy2(x) do
+    x*2
+  end
+
+  def chaining do
+    -5 
+   |> abs
+   |> IO.inspect(label: "IO inspect lets you debug value within chains") 
+   |> add(2)
+  end
 
   defp add(x, y), do: x + y
 

@@ -1,6 +1,12 @@
 # LearnElixirWithTests
 
-**TODO: Add description**
+## Testing flow
+
+`mix test.watch --stale`
+
+## useful resources
+
+- https://medium.com/multiverse-tech/elixirs-hidden-potions-664814640969
 
 ## Installation
 
