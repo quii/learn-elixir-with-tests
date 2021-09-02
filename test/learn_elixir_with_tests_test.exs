@@ -108,6 +108,9 @@ defmodule LearnElixirWithTestsTest do
     assert Float.to_string(1/3, [decimals: 2]) == "0.33"
     # can omit the square brackets if last argument is a keyword list
     assert Float.to_string(1/3, decimals: 1) == "0.3"
+
+    assert LearnElixirWithTests.optional_fun(2) == 4
+    assert LearnElixirWithTests.optional_fun(2, multiplier: 3) == 6
   end
 
 end

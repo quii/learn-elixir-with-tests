@@ -23,6 +23,14 @@ defmodule LearnElixirWithTests do
     x*2
   end
 
+  def optional_fun(x, opts \\ []) do
+    if opts[:multiplier] do
+      x * opts[:multiplier]
+    else 
+      x * 2
+    end
+  end
+
   def chaining do
     -5 
    |> abs
