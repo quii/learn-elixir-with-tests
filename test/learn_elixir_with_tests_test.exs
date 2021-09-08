@@ -113,4 +113,29 @@ defmodule LearnElixirWithTestsTest do
     assert LearnElixirWithTests.optional_fun(2, multiplier: 3) == 6
   end
 
+  test "Map (was HashDict) is a kv thing but performant for larger collections" do
+    myDict = [monday: 1, tuesday: 2, wednesday: 3] |> Enum.into(Map.new)
+    assert Map.get(myDict, :tuesday) == 2  
+
+    myDict2 = Map.put(myDict, :thursday, 4)
+    assert Map.get(myDict, :thursday) == nil
+    assert Map.get(myDict2, :thursday) == 4
+
+    # Map is enumerable, so we can use Enum functions, but presumably order isn't predictable
+    stuff = Enum.map(myDict2, fn key_value ->  
+      key = elem(key_value, 0)
+      value = elem(key_value, 1)
+      "#{key}-#{value}"
+      end
+    )
+
+    assert hd(stuff) == "monday-1"
+  end
+
+  test "MapSet (was HashSet), pretty obvious" do 
+    days = [:monday, "wtf", "wtf", 123] |> Enum.into(MapSet.new)
+
+    assert Enum.count(days) == 3
+  end
+
 end
