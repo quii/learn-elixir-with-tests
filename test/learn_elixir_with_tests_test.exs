@@ -138,4 +138,16 @@ defmodule LearnElixirWithTestsTest do
     assert Enum.count(days) == 3
   end
 
+  test "matching" do 
+    # = really means "match". Left hand side is matched to the right. Left is a pattern
+    # right hand side is an expression that evaluates to a term
+    person = {"Bob", 25} 
+    {name, age} = {"Bob", 25}
+
+    assert name == "Bob"
+
+    {{year, month, day}, time} = :calendar.local_time
+    assert year == 2021 # not the best test :) 
+  end
+
 end
