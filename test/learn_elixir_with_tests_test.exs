@@ -147,7 +147,40 @@ defmodule LearnElixirWithTestsTest do
     assert name == "Bob"
 
     {{year, month, day}, time} = :calendar.local_time
-    assert year == 2021 # not the best test :) 
+    assert year == 2021 # not the best test :)
+
+    # can ignore like you do in scala
+    {_, time} = :calendar.local_time
+    assert year == 2021 
+
+    # ^ the pin operator lets you match against the value of a variable
+    expected_name = "Bob"
+
+    # also recall that matches return the value, if it matches..
+    {name, age} = {^expected_name, _ } = {"Bob", 30}
+    assert age == 30
+
+    assert_raise(MatchError, fn -> {^expected_name, _} = {"Alice", 28} end)
+
+    # you can just match against a value, rather than a variable
+    assert_raise(MatchError, fn -> {"Bob", _} = {"Alice", 28} end)
+  end
+
+  test "matching lists" do
+    [first, second, third] = [1, 2, 3]
+    assert first == 1
+
+    assert_raise(MatchError, fn -> [1, 2, 4] = [1, 2, 3] end)
+
+    [head | tail] = [1, 2, 3]
+    assert head == 1
+    assert tail == [2, 3]
+
+    some_list = [22, 141234, 2]
+    [min | _] = Enum.sort(some_list)
+    assert min == 2
+    # better with hd
+    assert some_list |> Enum.sort |> hd == 2
   end
 
 end
