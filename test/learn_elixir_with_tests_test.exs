@@ -183,4 +183,11 @@ defmodule LearnElixirWithTestsTest do
     assert some_list |> Enum.sort |> hd == 2
   end
 
+  test "matching maps" do
+    some_map = %{name: "Bob", age: 25}
+    
+    %{name: alias} = some_map
+    assert alias == "Bob"
+  end
+
 end
